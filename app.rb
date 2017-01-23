@@ -31,7 +31,7 @@ end
 post '/voice' do
   twiml = Twilio::TwiML::Response.new do |r|
     if params['To'] and params['To'] != ''
-      r.Dial callerId: ENV['TWILIO_CALLER_ID'] do |d|
+      r.Dial do |d|
         # wrap the phone number or client name in the appropriate TwiML verb
         # by checking if the number given has only digits and format symbols
         if params['To'] =~ /^[\d\+\-\(\) ]+$/
