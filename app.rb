@@ -18,12 +18,12 @@ get '/token' do
   identity = Faker::Internet.user_name.gsub(/[^0-9a-z_]/i, '')
 
   capability = Twilio::Util::Capability.new ENV['TWILIO_ACCOUNT_SID'], ENV['TWILIO_AUTH_TOKEN']
-  # Create an application sid at 
+  # Create an application sid at
   # twilio.com/console/phone-numbers/dev-tools/twiml-apps and use it here
   capability.allow_client_outgoing ENV['TWILIO_TWIML_APP_SID']
   capability.allow_client_incoming identity
   token = capability.generate
-  
+
   # Generate the token and send to client
   json :identity => identity, :token => token
 end
@@ -44,7 +44,7 @@ post '/voice' do
       r.Say "Thanks for calling!"
     end
   end
-  
+
   content_type 'text/xml'
   twiml.text
 end
